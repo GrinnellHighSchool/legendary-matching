@@ -1,3 +1,4 @@
+
 import random
 
 def Match():
@@ -18,34 +19,24 @@ def Match():
                      "Andrew", "Brayden", "John", "Lincoln"]
     
     amount_of_people = int(input("Amount: "))
+    
     girl_dictionary = {}
     boy_dictionary = {}
+    
     ranking_girl = []
     ranking_boy = []
     
-    girl_count = 0
-    boy_count = 0
-    for girl_name in name_list_girl:
-        girl_count += 1
-        if girl_count <= amount_of_people:
-            for boy_name in name_list_boy:
-                boy_count += 1
-                if boy_count <= amount_of_people:
-                    ranking_boy.append(boy_name)
-            shuffled_boy_list = [str(w) for w in random.sample(ranking_boy, len(ranking_boy))]
-            girl_dictionary.update({(girl_name): shuffled_boy_list})
+    girl_names = random.sample(name_list_girl, amount_of_people)
+    ranking_boy = random.sample(name_list_boy, amount_of_people)
+    for girl in girl_names:
+        shuffled_boy_list = [str(w) for w in random.sample(ranking_boy, len(ranking_boy))]
+        girl_dictionary.update({(girl): shuffled_boy_list})
 
-    girl_count = 0
-    boy_count = 0
-    for boy_name in name_list_boy:
-        boy_count += 1
-        if boy_count <= amount_of_people:
-            for girl_name in name_list_girl:
-                girl_count += 1
-                if girl_count <= amount_of_people:
-                    ranking_girl.append(girl_name)
-            shuffled_girl_list = [str(w) for w in random.sample(ranking_girl, len(ranking_girl))]
-            boy_dictionary.update({(boy_name): shuffled_girl_list})
+    boy_names = random.sample(name_list_boy, amount_of_people)
+    ranking_girl = random.sample(name_list_girl, amount_of_people)
+    for boy in boy_names:
+        shuffled_girl_list = [str(w) for w in random.sample(ranking_girl, len(ranking_girl))]
+        boy_dictionary.update({(boy): shuffled_girl_list})
             
     print (girl_dictionary)
     print (boy_dictionary)
