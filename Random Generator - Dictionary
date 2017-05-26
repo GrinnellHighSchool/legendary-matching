@@ -27,16 +27,20 @@ def Match():
     ranking_boy = []
     
     girl_names = random.sample(name_list_girl, amount_of_people)
-    ranking_boy = random.sample(name_list_boy, amount_of_people)
+    boy_names = random.sample(name_list_boy, amount_of_people)
+
+    ranking_boy = random.sample(boy_names, len(boy_names))
     for girl in girl_names:
         shuffled_boy_list = [str(w) for w in random.sample(ranking_boy, len(ranking_boy))]
         girl_dictionary.update({(girl): shuffled_boy_list})
 
-    boy_names = random.sample(name_list_boy, amount_of_people)
-    ranking_girl = random.sample(name_list_girl, amount_of_people)
+    ranking_girl = random.sample(girl_names, len(girl_names))
     for boy in boy_names:
         shuffled_girl_list = [str(w) for w in random.sample(ranking_girl, len(ranking_girl))]
         boy_dictionary.update({(boy): shuffled_girl_list})
             
     print (girl_dictionary)
     print (boy_dictionary)
+
+         
+           
