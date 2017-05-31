@@ -1,0 +1,103 @@
+def theperfectmatch():
+    girls,guys = Match()
+    relationships = []
+    girl_proposal_number = {}
+    guy_proposal_offers = {}
+    for name in list(guys.keys()):
+        guy_proposal_offers[name] = []
+
+    for name in list(girls.keys()):
+        girl_proposal_number[name] = 0
+    while len(relationships) < len(girls):
+    
+
+        
+        for name in list(girls.keys()):
+            prefered = girls[name]
+            temp = towhomshouldIpropose(prefered,girl_proposal_number[name])
+            guy_proposal_offers[temp].append(name)
+            girl_proposal_number[name] += 1
+
+        for name in list(guys.keys()):
+            proposals = guy_proposal_offers[name]
+            temp = pickfavorite(proposals,guys[name])
+            print(temp)
+            if temp != None and (name,temp) not in relationships:
+                girl_proposal_number[temp] -= 1
+                relationships.append((name,temp))
+    
+        print(relationships)
+        
+#Returns the next pick as a string
+def towhomshouldIpropose(preference,alreadyproposedcount):
+    return preference[alreadyproposedcount]
+
+#Returns the top proposal as a string
+def pickfavorite(proposals,preference):
+    for pref in preference:
+        if pref in proposals:
+            return pref
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import random
+
+def Match():
+    name_list_girl = ["Sophia", "Emma", "Olivia", "Ava", "Mia", "Isabella", "Riley", "Aria",
+                      "Zoe", "Charlotte", "Lily", "Layla", "Amelia", "Emily", "Madelyn", "Aubrey",
+                      "Adalyn", "Madison", "Chloe", "Harper", "Abigail", "Aaliyah", "Avery",
+                      "Evelyn", "Kaylee", "Ella", "Ellie", "Scarlett", "Arianna", "Hailey",
+                      "Nora", "Addison", "Brooklyn", "Hannah", "Mila", "Leah", "Elizabeth",
+                      "Sarah", "Eliana", "Mackenzie", "Peyton", "Maria", "Grace", "Adeline",
+                      "Elena", "Anna", "Victoria", "Camilla", "Lillian", "Natalie"]
+    
+    name_list_boy = ["Jackson", "Aiden", "Lucas", "Liam", "Noah", "Ethan", "Mason", "Caden",
+                     "Oliver", "Elijah", "Grayson", "Jacob", "Michael", "Benjamin", "Carter",
+                     "James", "Jayden", "Logan", "Alexander", "Caleb", "Ryan", "Luke", "Daniel",
+                     "Jack", "William", "Owen", "Gabriel", "Matthew", "Connor", "Jayce", "Isaac",
+                     "Sebastian", "Henry", "Muhammad", "Cameron", "Wyatt", "Dylan", "Nathan",
+                     "Nicholas", "Julian", "Eli", "Levi", "Isaiah", "Landon", "David", "Christian",
+                     "Andrew", "Brayden", "John", "Lincoln"]
+    
+    amount_of_people = int(input("Amount: "))
+    
+    girl_dictionary = {}
+    boy_dictionary = {}
+    
+    ranking_girl = []
+    ranking_boy = []
+    
+    girl_names = random.sample(name_list_girl, amount_of_people)
+    boy_names = random.sample(name_list_boy, amount_of_people)
+
+    ranking_boy = random.sample(boy_names, len(boy_names))
+    for girl in girl_names:
+        shuffled_boy_list = [str(w) for w in random.sample(ranking_boy, len(ranking_boy))]
+        girl_dictionary.update({(girl): shuffled_boy_list})
+
+    ranking_girl = random.sample(girl_names, len(girl_names))
+    for boy in boy_names:
+        shuffled_girl_list = [str(w) for w in random.sample(ranking_girl, len(ranking_girl))]
+        boy_dictionary.update({(boy): shuffled_girl_list})
+            
+    print (girl_dictionary)
+    print ("")
+    print (boy_dictionary)
+    return girl_dictionary,boy_dictionary
+
